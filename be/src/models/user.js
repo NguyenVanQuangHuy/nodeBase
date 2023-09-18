@@ -23,5 +23,8 @@ const User = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    refreshToken:{
+        type:String,
+    }
 }, { timestamps: true });
 module.exports = mongoose.model("User", User);

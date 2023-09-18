@@ -1,6 +1,7 @@
 const asyncHandler = require('../utils/async-handler');
-// const { errorResponse, successResponse } = require('../utils/response');
-const AuthService=require("../services/auth.service")
+const AuthService=require("../services/auth.service");
+
+
 module.exports = {
 
     registerUser: asyncHandler(async (req, res) => {
@@ -9,9 +10,16 @@ module.exports = {
     }),
     loginUser: asyncHandler(async (req, res) => {
         const user = await AuthService.loginUser(req, res);
-        if (user.error) {
-            return res.status(404).json({ error: user.error });
-        }
+        return res.status(200).json(user);
+    }),
+
+    refreshToken:asyncHandler(async (req, res) => {
+        const user = await AuthService.refreshAccessToken(req, res);
+        return res.status(200).json(user);
+    }),
+
+    logoutUser:asyncHandler(async (req, res) => {
+        const user = await AuthService.logoutUser(req, res);
         return res.status(200).json(user);
     }),
     
