@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const User = new mongoose.Schema({
+import mongoose, { Schema, ObjectId } from "mongoose";
+const User = mongoose.model('users', new Schema({
     username: {
         type: String,
         required: true,
@@ -25,6 +25,17 @@ const User = new mongoose.Schema({
     },
     refreshToken:{
         type:String,
+    },
+    phoneNumber:{
+        type: Number,
+        maxlength: 10,
+        minlength: 10,
+    },
+    address: {
+        type: String,
+    },
+    contactFacebook: {
+        type: String
     }
-}, { timestamps: true });
-module.exports = mongoose.model("User", User);
+}, { timestamps: true }));
+export default User;
